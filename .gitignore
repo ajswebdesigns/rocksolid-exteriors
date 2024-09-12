@@ -1,0 +1,39 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore the dist directory (built files), unless you want it committed
+# Uncomment the next line if you don't want dist committed
+# dist/
+
+# Ignore logs
+logs
+*.log
+npm-debug.log*
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore environment variable files
+.env
+.env.local
+.env.*.local
+
+# Ignore lock files (depending on your package manager, you may want to ignore one of these)
+# Uncomment this line if you don't want package-lock.json committed
+# package-lock.json
+
+# Ignore other system files
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Ignore output files from some bundlers
+*.cache
+*.next
+out/
+build/
+
+# Ignore Tailwind CSS generated files
+tailwind.css
