@@ -37,13 +37,13 @@
         <div class="container mx-auto py-2 px-4 flex justify-between items-center">
             <!-- Logo -->
             <div>
-                <a href="#" class="focus:outline-none focus:ring-2 focus:ring-black">
+                <a href="#">
                     <img class="max-w-[155px]" width="155" src="../images/rocksolid-logo.png" alt="Rock Solid Exteriors Website Logo">
                 </a>
             </div>              
     
             <!-- Navigation -->
-            <nav aria-label="Main navigation">
+            <nav aria-label="Main navigation" x-data="{roofingDropdown: false}">
                 <ul class="flex gap-8 font-bold items-center">
                     <!-- Regular Links -->
                     <li>
@@ -61,7 +61,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
-                        <ul class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[200px] p-2">
+                        <ul x-show="roofingDropdown" class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[200px] p-2">
                             <li class="p-4 font-bold hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
                                 <a href="#">Attic Insulation</a>
                             </li>
@@ -107,15 +107,19 @@
                             </svg>
                         </a>
                     </li>
-    
+
+
                     <li>
                         <a href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Concrete
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4" aria-hidden="true" aria-label="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
                     </li>
+    
+    
+                   
     
                     <!-- Free Estimate Button with Calendar Icon -->
                     <li>
