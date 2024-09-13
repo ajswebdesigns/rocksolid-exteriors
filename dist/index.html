@@ -12,7 +12,6 @@
             <nav aria-label="Support navigation">
                 <ul class="flex gap-8">
                     <li><a href="/financing" class="hover:transition-colors hover:text-black focus:outline-none focus:ring-2 focus:ring-black" aria-label="Learn more about financing options">Financing</a></li>
-                    <li><a href="/brands" class="hover:transition-colors hover:text-black focus:outline-none focus:ring-2 focus:ring-black" aria-label="Discover the brands we offer">Brands</a></li>
                     <li><a href="/areas-served" class="hover:transition-colors hover:text-black focus:outline-none focus:ring-2 focus:ring-black" aria-label="Check areas we serve">Areas Served</a></li>
                     <li><a href="/contact" class="hover:transition-colors hover:text-black focus:outline-none focus:ring-2 focus:ring-black" aria-label="Get in touch with us">Contact Us</a></li>
                 </ul>
@@ -34,6 +33,7 @@
     </section>
     
    
+    
     <header class="shadow-lg">
         <div class="container mx-auto py-2 px-4 flex justify-between items-center">
             <!-- Logo -->
@@ -44,7 +44,7 @@
             </div>
     
             <!-- Navigation -->
-            <nav aria-label="Main navigation" x-data="{ roofingDropdown: false, roofStylesDropdown: false, aboutUsDropdown: false, sidingDropdown: false, sidingStylesDropdown: false, windowsDropdown: false, windowTypesDropdown: false, concreteDropdown: false, concreteProjectsDropdown: false, concreteTypesDropdown: false, brandsDropdown: false }" @click.outside="roofingDropdown = false; roofStylesDropdown = false; aboutUsDropdown = false; sidingDropdown = false; sidingStylesDropdown = false; windowsDropdown = false; windowTypesDropdown = false; concreteDropdown = false; concreteProjectsDropdown = false; concreteTypesDropdown = false; brandsDropdown = false">
+            <nav aria-label="Main navigation" x-data="{ activeDropdown: null, activeNestedDropdown: null }" @click.outside="activeDropdown = null; activeNestedDropdown = null">
                 <ul class="flex gap-8 font-bold items-center">
                     <!-- Home Link -->
                     <li>
@@ -53,13 +53,13 @@
     
                     <!-- About Us with Dropdown -->
                     <li class="relative">
-                        <a x-on:click="aboutUsDropdown = !aboutUsDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                        <a @click.prevent="activeDropdown = activeDropdown === 'aboutUs' ? null : 'aboutUs'; activeNestedDropdown = null" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             About Us
-                            <svg x-bind:class="aboutUsDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                            <svg :class="activeDropdown === 'aboutUs' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
-                        <ul x-show="aboutUsDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                        <ul x-show="activeDropdown === 'aboutUs'" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
                                 <a href="#" class="block p-4 font-bold">Certifications</a>
                             </li>
@@ -69,13 +69,13 @@
     
                             <!-- Brands with Nested Dropdown -->
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
-                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="brandsDropdown = !brandsDropdown">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" @click.prevent.stop="activeNestedDropdown = activeNestedDropdown === 'brands' ? null : 'brands'">
                                     Brands
-                                    <svg x-bind:class="brandsDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                    <svg :class="activeNestedDropdown === 'brands' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                     </svg>
                                 </a>
-                                <ul x-show="brandsDropdown" x-transition class="p-1">
+                                <ul x-show="activeNestedDropdown === 'brands'" x-transition class="p-1">
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Certain Teed</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">James Hardie</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Mi Windows and Doors</a></li>
@@ -90,13 +90,13 @@
     
                     <!-- Roofing with Dropdown -->
                     <li class="relative">
-                        <a x-on:click="roofingDropdown = !roofingDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                        <a @click.prevent="activeDropdown = activeDropdown === 'roofing' ? null : 'roofing'; activeNestedDropdown = null" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Roofing
-                            <svg x-bind:class="roofingDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                            <svg :class="activeDropdown === 'roofing' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
-                        <ul x-show="roofingDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                        <ul x-show="activeDropdown === 'roofing'" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
                                 <a href="#" class="block p-4 font-bold">Attic Insulation</a>
                             </li>
@@ -109,13 +109,13 @@
     
                             <!-- Nested Dropdown for Roof Styles -->
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
-                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="roofStylesDropdown = !roofStylesDropdown">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" @click.prevent.stop="activeNestedDropdown = activeNestedDropdown === 'roofStyles' ? null : 'roofStyles'">
                                     Roof Styles 
-                                    <svg x-bind:class="roofStylesDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                    <svg :class="activeNestedDropdown === 'roofStyles' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </a>
-                                <ul x-show="roofStylesDropdown" x-transition class="p-1">
+                                <ul x-show="activeNestedDropdown === 'roofStyles'" x-transition class="p-1">
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Asphalt Shingles</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Metal Roof</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Metal Shingles</a></li>
@@ -131,13 +131,13 @@
     
                     <!-- Siding with Dropdown -->
                     <li class="relative">
-                        <a x-on:click="sidingDropdown = !sidingDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                        <a @click.prevent="activeDropdown = activeDropdown === 'siding' ? null : 'siding'; activeNestedDropdown = null" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Siding
-                            <svg x-bind:class="sidingDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                            <svg :class="activeDropdown === 'siding' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
-                        <ul x-show="sidingDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                        <ul x-show="activeDropdown === 'siding'" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
                                 <a href="#" class="block p-4 font-bold">Gutter Replacement</a>
                             </li>
@@ -150,13 +150,13 @@
     
                             <!-- Nested Dropdown for Siding Styles -->
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
-                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="sidingStylesDropdown = !sidingStylesDropdown">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" @click.prevent.stop="activeNestedDropdown = activeNestedDropdown === 'sidingStyles' ? null : 'sidingStyles'">
                                     Siding Styles 
-                                    <svg x-bind:class="sidingStylesDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                    <svg :class="activeNestedDropdown === 'sidingStyles' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </a>
-                                <ul x-show="sidingStylesDropdown" x-transition class="p-1">
+                                <ul x-show="activeNestedDropdown === 'sidingStyles'" x-transition class="p-1">
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Aluminum</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Cedar Shake</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Cultured Stone</a></li>
@@ -170,13 +170,13 @@
     
                     <!-- Windows with Dropdown -->
                     <li class="relative">
-                        <a x-on:click="windowsDropdown = !windowsDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                        <a @click.prevent="activeDropdown = activeDropdown === 'windows' ? null : 'windows'; activeNestedDropdown = null" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Windows
-                            <svg x-bind:class="windowsDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                            <svg :class="activeDropdown === 'windows' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
-                        <ul x-show="windowsDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                        <ul x-show="activeDropdown === 'windows'" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
                                 <a href="#" class="block p-4 font-bold">Energy Efficient Windows</a>
                             </li>
@@ -189,13 +189,13 @@
     
                             <!-- Nested Dropdown for Window Types -->
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
-                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="windowTypesDropdown = !windowTypesDropdown">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" @click.prevent.stop="activeNestedDropdown = activeNestedDropdown === 'windowTypes' ? null : 'windowTypes'">
                                     Window Types 
-                                    <svg x-bind:class="windowTypesDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                    <svg :class="activeNestedDropdown === 'windowTypes' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </a>
-                                <ul x-show="windowTypesDropdown" x-transition class="p-1">
+                                <ul x-show="activeNestedDropdown === 'windowTypes'" x-transition class="p-1">
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Bay Windows</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Bow Windows</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Crank Windows</a></li>
@@ -211,26 +211,26 @@
     
                     <!-- Concrete with Dropdown -->
                     <li class="relative">
-                        <a x-on:click="concreteDropdown = !concreteDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                        <a @click.prevent="activeDropdown = activeDropdown === 'concrete' ? null : 'concrete'; activeNestedDropdown = null" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Concrete
-                            <svg x-bind:class="concreteDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                            <svg :class="activeDropdown === 'concrete' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
-                        <ul x-show="concreteDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                        <ul x-show="activeDropdown === 'concrete'" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
                                 <a href="#" class="block p-4 font-bold">Basement Waterproofing</a>
                             </li>
     
                             <!-- Nested Dropdown for Concrete Projects -->
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
-                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="concreteProjectsDropdown = !concreteProjectsDropdown">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" @click.prevent.stop="activeNestedDropdown = activeNestedDropdown === 'concreteProjects' ? null : 'concreteProjects'">
                                     Concrete Projects
-                                    <svg x-bind:class="concreteProjectsDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                    <svg :class="activeNestedDropdown === 'concreteProjects' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </a>
-                                <ul x-show="concreteProjectsDropdown" x-transition class="p-1">
+                                <ul x-show="activeNestedDropdown === 'concreteProjects'" x-transition class="p-1">
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Driveways</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Footing & Rat Walls</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Garage Pads</a></li>
@@ -243,13 +243,13 @@
     
                             <!-- Nested Dropdown for Concrete Types -->
                             <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
-                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="concreteTypesDropdown = !concreteTypesDropdown">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" @click.prevent.stop="activeNestedDropdown = activeNestedDropdown === 'concreteTypes' ? null : 'concreteTypes'">
                                     Concrete Types
-                                    <svg x-bind:class="concreteTypesDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                    <svg :class="activeNestedDropdown === 'concreteTypes' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </a>
-                                <ul x-show="concreteTypesDropdown" x-transition class="p-1">
+                                <ul x-show="activeNestedDropdown === 'concreteTypes'" x-transition class="p-1">
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Exposed Aggregate Concrete</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Stained Concrete</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Stamped Concrete</a></li>
