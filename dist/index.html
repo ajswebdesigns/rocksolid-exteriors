@@ -44,17 +44,51 @@
             </div>
     
             <!-- Navigation -->
-            <nav aria-label="Main navigation" x-data="{ roofingDropdown: false, roofStylesDropdown: false }" @click.outside="roofingDropdown = false; roofStylesDropdown = false">
+            <nav aria-label="Main navigation" x-data="{ roofingDropdown: false, roofStylesDropdown: false, aboutUsDropdown: false, sidingDropdown: false, sidingStylesDropdown: false, windowsDropdown: false, windowTypesDropdown: false, concreteDropdown: false, concreteProjectsDropdown: false, concreteTypesDropdown: false, brandsDropdown: false }" @click.outside="roofingDropdown = false; roofStylesDropdown = false; aboutUsDropdown = false; sidingDropdown = false; sidingStylesDropdown = false; windowsDropdown = false; windowTypesDropdown = false; concreteDropdown = false; concreteProjectsDropdown = false; concreteTypesDropdown = false; brandsDropdown = false">
                 <ul class="flex gap-8 font-bold items-center">
-                    <!-- Regular Links -->
+                    <!-- Home Link -->
                     <li>
                         <a href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black">Home</a>
                     </li>
-                    <li>
-                        <a href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black">About Us</a>
+    
+                    <!-- About Us with Dropdown -->
+                    <li class="relative">
+                        <a x-on:click="aboutUsDropdown = !aboutUsDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                            About Us
+                            <svg x-bind:class="aboutUsDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                            </svg>
+                        </a>
+                        <ul x-show="aboutUsDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Certifications</a>
+                            </li>
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Lifetime Warranties for Roofing</a>
+                            </li>
+    
+                            <!-- Brands with Nested Dropdown -->
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="brandsDropdown = !brandsDropdown">
+                                    Brands
+                                    <svg x-bind:class="brandsDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                    </svg>
+                                </a>
+                                <ul x-show="brandsDropdown" x-transition class="p-1">
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Certain Teed</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">James Hardie</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Mi Windows and Doors</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Owens Corning</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">ProVia</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Versetta Stone</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Vesta Steel</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
     
-                    <!-- Links with Icons and Dropdown -->
+                    <!-- Roofing with Dropdown -->
                     <li class="relative">
                         <a x-on:click="roofingDropdown = !roofingDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Roofing
@@ -81,7 +115,6 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </a>
-                                <!-- Dropdown that shows/hides -->
                                 <ul x-show="roofStylesDropdown" x-transition class="p-1">
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Asphalt Shingles</a></li>
                                     <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Metal Roof</a></li>
@@ -96,32 +129,133 @@
                         </ul>
                     </li>
     
-                    <!-- Other Menu Items -->
-                    <li>
-                        <a href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                    <!-- Siding with Dropdown -->
+                    <li class="relative">
+                        <a x-on:click="sidingDropdown = !sidingDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Siding
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4" aria-hidden="true" aria-label="dropdown">
+                            <svg x-bind:class="sidingDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
+                        <ul x-show="sidingDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Gutter Replacement</a>
+                            </li>
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Siding Repair</a>
+                            </li>
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Siding Replacement</a>
+                            </li>
+    
+                            <!-- Nested Dropdown for Siding Styles -->
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="sidingStylesDropdown = !sidingStylesDropdown">
+                                    Siding Styles 
+                                    <svg x-bind:class="sidingStylesDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </a>
+                                <ul x-show="sidingStylesDropdown" x-transition class="p-1">
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Aluminum</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Cedar Shake</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Cultured Stone</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Custom Metal</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Hardie Board</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Vinyl</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
     
-                    <li>
-                        <a href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                    <!-- Windows with Dropdown -->
+                    <li class="relative">
+                        <a x-on:click="windowsDropdown = !windowsDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Windows
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4" aria-hidden="true" aria-label="dropdown">
+                            <svg x-bind:class="windowsDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
+                        <ul x-show="windowsDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Energy Efficient Windows</a>
+                            </li>
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Sliding Glass Door</a>
+                            </li>
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Window Installation</a>
+                            </li>
+    
+                            <!-- Nested Dropdown for Window Types -->
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="windowTypesDropdown = !windowTypesDropdown">
+                                    Window Types 
+                                    <svg x-bind:class="windowTypesDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </a>
+                                <ul x-show="windowTypesDropdown" x-transition class="p-1">
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Bay Windows</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Bow Windows</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Crank Windows</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Double-Hung Windows</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Low-E</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Single-Hung Windows</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Triple & Double Pane Windows</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Vinyl Windows</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
     
-                    <li>
-                        <a href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
+                    <!-- Concrete with Dropdown -->
+                    <li class="relative">
+                        <a x-on:click="concreteDropdown = !concreteDropdown" href="#" class="hover:transition-colors hover:text-primary focus:text-primary focus:outline-none focus:ring-2 focus:ring-black flex items-center gap-1">
                             Concrete
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4" aria-hidden="true" aria-label="dropdown">
+                            <svg x-bind:class="concreteDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                             </svg>
                         </a>
+                        <ul x-show="concreteDropdown" x-transition class="absolute bg-primary top-full right-0 whitespace-nowrap rounded-md text-sm min-w-[250px] p-2">
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a href="#" class="block p-4 font-bold">Basement Waterproofing</a>
+                            </li>
+    
+                            <!-- Nested Dropdown for Concrete Projects -->
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="concreteProjectsDropdown = !concreteProjectsDropdown">
+                                    Concrete Projects
+                                    <svg x-bind:class="concreteProjectsDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </a>
+                                <ul x-show="concreteProjectsDropdown" x-transition class="p-1">
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Driveways</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Footing & Rat Walls</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Garage Pads</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Patios</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Pool Decks</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Sidewalks</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Subdivision Roads</a></li>
+                                </ul>
+                            </li>
+    
+                            <!-- Nested Dropdown for Concrete Types -->
+                            <li class="hover:bg-secondary hover:transition-colors ease-in-out cursor-pointer text-white rounded-md">
+                                <a class="flex items-center justify-between block p-4 font-bold" href="#" x-on:click.prevent.stop="concreteTypesDropdown = !concreteTypesDropdown">
+                                    Concrete Types
+                                    <svg x-bind:class="concreteTypesDropdown ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 ml-auto transition-transform duration-300 ease-in-out" aria-hidden="true" aria-label="dropdown">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </a>
+                                <ul x-show="concreteTypesDropdown" x-transition class="p-1">
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Exposed Aggregate Concrete</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Stained Concrete</a></li>
+                                    <li><a href="#" class="block p-4 focus:outline-none focus:ring-2 focus:ring-black hover:bg-primary hover:transition-colors rounded-md">Stamped Concrete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
     
                     <!-- Free Estimate Button -->
@@ -138,6 +272,9 @@
             </nav>
         </div>
     </header>
+    
+    
+    
     
     
 
