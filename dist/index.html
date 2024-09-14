@@ -43,7 +43,6 @@
                 </a>
             </div>
             <!-- Mobile Navigation -->
-           
             <nav class="lg:hidden" x-data="{navbarOpen: false}">
                 <!-- Accessible Hamburger Button -->
                 <button @click="navbarOpen = !navbarOpen" class="block bg-primary rounded-md px-3 py-4 cursor-pointer hover:bg-primary-dark hover:transition-all" aria-expanded="false" :aria-expanded="navbarOpen.toString()" aria-label="Toggle navigation menu">
@@ -290,13 +289,8 @@
                 </div>
             </nav>
             
-            
-            
-            
-            
-            
             <!-- Navigation -->
-            <nav aria-label="Main navigation" x-data="{ activeDropdown: null, activeNestedDropdown: null }" @click.outside="activeDropdown = null; activeNestedDropdown = null">
+            <nav class="hidden lg:block" aria-label="Main navigation" x-data="{ activeDropdown: null, activeNestedDropdown: null }" @click.outside="activeDropdown = null; activeNestedDropdown = null">
                 <ul class="flex gap-8 font-bold items-center">
                     <!-- Home Link -->
                     <li>
@@ -527,7 +521,7 @@
     
     <section aria-labelledby="handheld-menu">
         <!-- Handheld Menu -->
-        <nav class="shadow-lg fixed bottom-0 bg-primary w-full sm:block md:hidden" aria-label="Footer navigation" id="handheld-menu">
+        <nav class="shadow-lg fixed bottom-0 bg-primary w-full sm:block lg:hidden" aria-label="Footer navigation" id="handheld-menu">
             <div class="container mx-auto py-3 px-4 flex justify-between items-center">
                 
                 <!-- Email Link -->
