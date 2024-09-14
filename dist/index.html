@@ -44,6 +44,239 @@
             </div>
             <!-- Mobile Navigation -->
            
+            <nav class="lg:hidden" x-data="{navbarOpen:false}">
+                <button @click="navbarOpen = !navbarOpen" class="block bg-primary rounded-md px-3 py-4 cursor-pointer hover:bg-primary-dark hover:transition-all">
+                    <div x-bind:class="{'rotate-45':navbarOpen, 'top-2':navbarOpen}" class="bg-white rounded-full w-8 h-1 relative transition-all"></div>
+                    <div x-bind:class="{'opacity-0' :navbarOpen, 'opacity-100': !navbarOpen}" class="bg-white rounded-full w-8 h-1 mt-1 opacity-100"></div>
+                    <div x-bind:class="{'-rotate-45' :navbarOpen, '-top-2' :navbarOpen}" class="bg-white rounded-full w-8 h-1 mt-1 transition-all relative"></div>
+                </button>
+                <div x-bind:class="{'translate-x-0' : navbarOpen}" class="absolute transition-all transform inset-0 -translate-x-full z-10 w-80 bg-primary text-white h-screen top-0 p-3">
+                    <ul>
+                        <li class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <a class="text-white block" href="#">Home</a>
+                        </li>
+                        <li x-data="{dropdownOpen: false}" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <a @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <span>About Us</span>
+                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                </svg>
+                            </a>
+                            <ul x-show="dropdownOpen" x-transition class="mt-2 pl-4">
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Certifications</a>
+                                </li>
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Lifetime Warranties for Roofing</a>
+                                </li>
+                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                        <span>Brands</span>
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                        </svg>
+                                    </a>
+                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Certain Teed</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">James Hardie</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Mi Windows and Doors</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Owens Corning</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">ProVia</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Versetta Stone</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Vesta Steel</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li x-data="{dropdownOpen: false}" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <a @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <span>Roofing</span>
+                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                </svg>
+                            </a>
+                            <ul x-show="dropdownOpen" x-transition class="mt-2 pl-4">
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Attic Insulation</a>
+                                </li>
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Roof Repair</a>
+                                </li>
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Roof Replacement</a>
+                                </li>
+                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                        <span>Roof Styles</span>
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                        </svg>
+                                    </a>
+                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Asphalt Shingles</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Metal Roof</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Metal Shingles</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Roof Visualizer</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Roof Ventilation</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li x-data="{dropdownOpen: false}" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <a @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <span>Windows</span>
+                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                </svg>
+                            </a>
+                            <ul x-show="dropdownOpen" x-transition class="mt-2 pl-4">
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Energy Efficient Windows</a>
+                                </li>
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Sliding Glass Door</a>
+                                </li>
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Window Installation</a>
+                                </li>
+                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                        <span>Window Types</span>
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                        </svg>
+                                    </a>
+                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Bay Windows</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Bow Windows</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Crank Windows</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Double-Hung Windows</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Low-E</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Single-Hung Windows</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Triple & Double Pane Windows</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Vinyl Windows</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li x-data="{dropdownOpen: false}" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <a @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <span>Concrete</span>
+                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                </svg>
+                            </a>
+                            <ul x-show="dropdownOpen" x-transition class="mt-2 pl-4">
+                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a class="block text-white" href="#">Basement Waterproofing</a>
+                                </li>
+                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                        <span>Concrete Projects</span>
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                        </svg>
+                                    </a>
+                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Driveways</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Footing & Rat Walls</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Garage Pads</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Patios</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Pool Decks</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Sidewalks</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Subdivision Roads</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                        <span>Concrete Types</span>
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
+                                        </svg>
+                                    </a>
+                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Exposed Aggregate Concrete</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Stained Concrete</a>
+                                        </li>
+                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                            <a class="block text-white" href="#">Stamped Concrete</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Additional Links -->
+                        <li class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <a class="block text-white" href="#">Financing</a>
+                        </li>
+                        <li class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <a class="block text-white" href="#">Areas Served</a>
+                        </li>
+                        <li class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <a class="block text-white" href="#">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+            
             
             
             <!-- Navigation -->
