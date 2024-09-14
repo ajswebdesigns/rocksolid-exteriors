@@ -44,218 +44,232 @@
             </div>
             <!-- Mobile Navigation -->
            
-            <nav class="lg:hidden" x-data="{navbarOpen:false}">
-                <button @click="navbarOpen = !navbarOpen" class="block bg-primary rounded-md px-3 py-4 cursor-pointer hover:bg-primary-dark hover:transition-all">
+            <nav class="lg:hidden" x-data="{navbarOpen: false}">
+                <!-- Accessible Hamburger Button -->
+                <button @click="navbarOpen = !navbarOpen" class="block bg-primary rounded-md px-3 py-4 cursor-pointer hover:bg-primary-dark hover:transition-all" aria-expanded="false" :aria-expanded="navbarOpen.toString()" aria-label="Toggle navigation menu">
                     <div x-bind:class="{'rotate-45':navbarOpen, 'top-2':navbarOpen}" class="bg-white rounded-full w-8 h-1 relative transition-all"></div>
                     <div x-bind:class="{'opacity-0' :navbarOpen, 'opacity-100': !navbarOpen}" class="bg-white rounded-full w-8 h-1 mt-1 opacity-100"></div>
                     <div x-bind:class="{'-rotate-45' :navbarOpen, '-top-2' :navbarOpen}" class="bg-white rounded-full w-8 h-1 mt-1 transition-all relative"></div>
                 </button>
-                <div x-bind:class="{'translate-x-0' : navbarOpen}" class="absolute transition-all transform inset-0 -translate-x-full z-10 w-80 bg-primary text-white h-screen top-0 p-3">
-                    <ul>
-                        <li class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+            
+                <div x-bind:class="{'translate-x-0': navbarOpen}" class="absolute transition-all transform inset-0 -translate-x-full z-10 w-80 bg-primary text-white h-screen top-0 p-3 overflow-y-auto">
+                    <ul role="menu">
+                        <li role="menuitem" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
                             <a class="text-white block" href="#">Home</a>
                         </li>
-                        <li x-data="{dropdownOpen: false}" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
-                            <a @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer">
+                        <li x-data="{dropdownOpen: false}" role="menuitem" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <!-- Accessible Button for About Us -->
+                            <button @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="dropdownOpen.toString()" aria-controls="about-submenu" aria-label="Toggle About Us dropdown">
                                 <span>About Us</span>
-                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6">
+                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                 </svg>
-                            </a>
-                            <ul x-show="dropdownOpen" x-transition class="mt-2 pl-4">
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                            </button>
+                            <ul x-show="dropdownOpen" x-transition id="about-submenu" class="mt-2 pl-4" role="menu">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Certifications</a>
                                 </li>
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Lifetime Warranties for Roofing</a>
                                 </li>
-                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
-                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <li x-data="{nestedDropdownOpen: false}" role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <!-- Accessible Button for Brands Dropdown -->
+                                    <button @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="nestedDropdownOpen.toString()" aria-controls="brands-submenu" aria-label="Toggle Brands dropdown">
                                         <span>Brands</span>
-                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                         </svg>
-                                    </a>
-                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                    </button>
+                                    <ul x-show="nestedDropdownOpen" x-transition id="brands-submenu" class="mt-2 pl-4" role="menu">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Certain Teed</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">James Hardie</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Mi Windows and Doors</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Owens Corning</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">ProVia</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Versetta Stone</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Vesta Steel</a>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        <li x-data="{dropdownOpen: false}" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
-                            <a @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer">
+                        <!-- Roofing Section -->
+                        <li x-data="{dropdownOpen: false}" role="menuitem" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <!-- Accessible Button for Roofing Dropdown -->
+                            <button @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="dropdownOpen.toString()" aria-controls="roofing-submenu" aria-label="Toggle Roofing dropdown">
                                 <span>Roofing</span>
-                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6">
+                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                 </svg>
-                            </a>
-                            <ul x-show="dropdownOpen" x-transition class="mt-2 pl-4">
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                            </button>
+                            <ul x-show="dropdownOpen" x-transition id="roofing-submenu" class="mt-2 pl-4" role="menu">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Attic Insulation</a>
                                 </li>
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Roof Repair</a>
                                 </li>
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Roof Replacement</a>
                                 </li>
-                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
-                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <li x-data="{nestedDropdownOpen: false}" role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <!-- Accessible Button for Roof Styles Dropdown -->
+                                    <button @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="nestedDropdownOpen.toString()" aria-controls="roof-styles-submenu" aria-label="Toggle Roof Styles dropdown">
                                         <span>Roof Styles</span>
-                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                         </svg>
-                                    </a>
-                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                    </button>
+                                    <ul x-show="nestedDropdownOpen" x-transition id="roof-styles-submenu" class="mt-2 pl-4" role="menu">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Asphalt Shingles</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Metal Roof</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Metal Shingles</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Roof Visualizer</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Roof Ventilation</a>
                                 </li>
                             </ul>
                         </li>
-                        <li x-data="{dropdownOpen: false}" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
-                            <a @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer">
+                        <!-- Windows Section -->
+                        <li x-data="{dropdownOpen: false}" role="menuitem" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <!-- Accessible Button for Windows Dropdown -->
+                            <button @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="dropdownOpen.toString()" aria-controls="windows-submenu" aria-label="Toggle Windows dropdown">
                                 <span>Windows</span>
-                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6">
+                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                 </svg>
-                            </a>
-                            <ul x-show="dropdownOpen" x-transition class="mt-2 pl-4">
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                            </button>
+                            <ul x-show="dropdownOpen" x-transition id="windows-submenu" class="mt-2 pl-4" role="menu">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Energy Efficient Windows</a>
                                 </li>
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Sliding Glass Door</a>
                                 </li>
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Window Installation</a>
                                 </li>
-                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
-                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <li x-data="{nestedDropdownOpen: false}" role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <!-- Accessible Button for Window Types Dropdown -->
+                                    <button @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="nestedDropdownOpen.toString()" aria-controls="window-types-submenu" aria-label="Toggle Window Types dropdown">
                                         <span>Window Types</span>
-                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                         </svg>
-                                    </a>
-                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                    </button>
+                                    <ul x-show="nestedDropdownOpen" x-transition id="window-types-submenu" class="mt-2 pl-4" role="menu">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Bay Windows</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Bow Windows</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Crank Windows</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Double-Hung Windows</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Low-E</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Single-Hung Windows</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Triple & Double Pane Windows</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Vinyl Windows</a>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
-                        <li x-data="{dropdownOpen: false}" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
-                            <a @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer">
+                        <!-- Concrete Section -->
+                        <li x-data="{dropdownOpen: false}" role="menuitem" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                            <!-- Accessible Button for Concrete Dropdown -->
+                            <button @click="dropdownOpen = !dropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="dropdownOpen.toString()" aria-controls="concrete-submenu" aria-label="Toggle Concrete dropdown">
                                 <span>Concrete</span>
-                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6">
+                                <svg x-bind:class="{'rotate-180': dropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition-all transform w-6 h-6" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                 </svg>
-                            </a>
-                            <ul x-show="dropdownOpen" x-transition class="mt-2 pl-4">
-                                <li class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                            </button>
+                            <ul x-show="dropdownOpen" x-transition id="concrete-submenu" class="mt-2 pl-4" role="menu">
+                                <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
                                     <a class="block text-white" href="#">Basement Waterproofing</a>
                                 </li>
-                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
-                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <li x-data="{nestedDropdownOpen: false}" role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <!-- Accessible Button for Concrete Projects Dropdown -->
+                                    <button @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="nestedDropdownOpen.toString()" aria-controls="concrete-projects-submenu" aria-label="Toggle Concrete Projects dropdown">
                                         <span>Concrete Projects</span>
-                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                         </svg>
-                                    </a>
-                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                    </button>
+                                    <ul x-show="nestedDropdownOpen" x-transition id="concrete-projects-submenu" class="mt-2 pl-4" role="menu">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Driveways</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Footing & Rat Walls</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Garage Pads</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Patios</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Pool Decks</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Sidewalks</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Subdivision Roads</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li x-data="{nestedDropdownOpen: false}" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
-                                    <a @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer">
+                                <li x-data="{nestedDropdownOpen: false}" role="menuitem" class="text-sm p-2 rounded-md hover:bg-secondary hover:transition-all">
+                                    <!-- Accessible Button for Concrete Types Dropdown -->
+                                    <button @click="nestedDropdownOpen = !nestedDropdownOpen" class="flex justify-between items-center cursor-pointer w-full text-left" aria-expanded="false" :aria-expanded="nestedDropdownOpen.toString()" aria-controls="concrete-types-submenu" aria-label="Toggle Concrete Types dropdown">
                                         <span>Concrete Types</span>
-                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform">
+                                        <svg x-bind:class="{'rotate-180': nestedDropdownOpen}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 transition-all transform" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25L12 15.75 4.5 8.25" />
                                         </svg>
-                                    </a>
-                                    <ul x-show="nestedDropdownOpen" x-transition class="mt-2 pl-4">
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                    </button>
+                                    <ul x-show="nestedDropdownOpen" x-transition id="concrete-types-submenu" class="mt-2 pl-4" role="menu">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Exposed Aggregate Concrete</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Stained Concrete</a>
                                         </li>
-                                        <li class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
+                                        <li role="menuitem" class="text-sm p-2 rounded-md hover:bg-primary hover:transition-all">
                                             <a class="block text-white" href="#">Stamped Concrete</a>
                                         </li>
                                     </ul>
@@ -263,18 +277,20 @@
                             </ul>
                         </li>
                         <!-- Additional Links -->
-                        <li class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                        <li role="menuitem" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
                             <a class="block text-white" href="#">Financing</a>
                         </li>
-                        <li class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                        <li role="menuitem" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
                             <a class="block text-white" href="#">Areas Served</a>
                         </li>
-                        <li class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
+                        <li role="menuitem" class="rounded-md hover:bg-secondary hover:transition-all cursor-pointer p-4">
                             <a class="block text-white" href="#">Contact Us</a>
                         </li>
                     </ul>
                 </div>
             </nav>
+            
+            
             
             
             
